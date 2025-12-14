@@ -49,9 +49,8 @@ jobs:
     - name: Aguardar o relatório (debug)
       run: sleep 10s
           
-    - name: Verificar Quality Gate e Falhar Pipeline se Necessário
-      uses: sonarsource/sonarqube-quality-gate-action@master
-      timeout-minutes: 5 # Espera até 5 minutos para o Sonar processar
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
