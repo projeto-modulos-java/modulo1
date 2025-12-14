@@ -60,6 +60,10 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.9.6</version>
 		</dependency>
+		<properties>
+			<sonar.organization>projeto-modulos-java</sonar.organization>
+		</properties>
+
 				
 		
 	</dependencies>
