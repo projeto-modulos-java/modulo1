@@ -38,7 +38,12 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=projeto-modulos-java_modulo1
-    
+    - name: Verificar Quality Gate e Falhar Pipeline se Necessário
+      uses: sonarsource/sonarqube-quality-gate-action@master
+      timeout-minutes: 5 # Espera até 5 minutos para o Sonar processar
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag modulo1:$(date +%s)
