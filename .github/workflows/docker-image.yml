@@ -45,6 +45,9 @@ jobs:
             -Dsonar.projectKey=projeto-modulos-java_modulo1 \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+            
+    - name: Aguardar o relatório (debug)
+      run: sleep 10s
           
     - name: Verificar Quality Gate e Falhar Pipeline se Necessário
       uses: sonarsource/sonarqube-quality-gate-action@master
