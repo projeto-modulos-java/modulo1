@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping(path = "{id}")
     public ResponseEntity<UserResponse> get(@PathVariable int id){
-        logger.info("Listar usuario por id: " + id);
+        logger.info("Listar usuario por id: {}", id);
         return ResponseEntity.ok(adapter.adaptResponse(service.findById(id)));
     }
 
@@ -64,7 +64,7 @@ public class UserController {
 
     @PutMapping(path = "{id}")
     public ResponseEntity<Object> put(@PathVariable("id") int id, @RequestBody UserRequest user) throws Exception{
-        logger.info("Atualizando usuário: " + id);
+        logger.info("Atualizando usuário: {}", id);
         service.updateUser(adapter.adaptUser(user), id);
         return ResponseEntity.noContent().build();
     }
@@ -72,7 +72,7 @@ public class UserController {
     @DeleteMapping(path = "{id}")
     @RolesAllowed("ADMIN")
     public ResponseEntity<Object> delete(@PathVariable int id){
-        logger.info("Desativando usuário: " + id);
+        logger.info("Desativando usuário: {}", id);
         this.service.delete(id);
         return ResponseEntity.ok().build();
     }
