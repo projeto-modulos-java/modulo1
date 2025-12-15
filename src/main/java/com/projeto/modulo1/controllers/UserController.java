@@ -20,6 +20,7 @@ import com.projeto.modulo1.controllers.adapters.UserDTOAdapter;
 import com.projeto.modulo1.controllers.dto.UserRequest;
 import com.projeto.modulo1.controllers.dto.UserResponse;
 import com.projeto.modulo1.services.UserService;
+import com.projeto.modulo1.services.exceptions.UserException;
 
 import jakarta.annotation.security.RolesAllowed;
 
@@ -27,9 +28,9 @@ import jakarta.annotation.security.RolesAllowed;
 @RequestMapping(path = "/user")
 public class UserController {
 
-    final private UserService service;
-    final private UserDTOAdapter adapter;
-    final private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final UserService service;
+    private final UserDTOAdapter adapter;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public UserController(UserService service, UserDTOAdapter adapter){
         this.service = service;
@@ -56,14 +57,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> post(@RequestBody UserRequest user) throws Exception{
+    public ResponseEntity<Object> post(@RequestBody UserRequest user) throws UserException{
         logger.info("Cadastro novo usuário");
         service.createUser(adapter.adaptUser(user));
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Object> put(@PathVariable("id") int id, @RequestBody UserRequest user) throws Exception{
+    public ResponseEntity<Object> put(@PathVariable("id") int id, @RequestBody UserRequest user) throws UserException{
         logger.info("Atualizando usuário: {}", id);
         service.updateUser(adapter.adaptUser(user), id);
         return ResponseEntity.noContent().build();

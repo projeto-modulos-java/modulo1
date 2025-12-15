@@ -1,7 +1,7 @@
 package com.projeto.modulo1.services.exceptions;
 
 public class UserException extends Exception {
-    private String message;
+    private final String message;
 
     private int status = 400;
 
@@ -12,10 +12,6 @@ public class UserException extends Exception {
     @Override
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public int getStatus() {
