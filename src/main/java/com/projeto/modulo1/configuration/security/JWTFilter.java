@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.nimbusds.jose.JWSVerifier;
@@ -18,7 +17,6 @@ import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 
-import ch.qos.logback.classic.spi.ILoggingEvent;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,7 +36,7 @@ public class JWTFilter implements Filter{
         ObjectMapper mapper = new ObjectMapper();
         Permission perm = mapper.convertValue(permissions, Permission.class);
 
-        ArrayList<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        ArrayList<GrantedAuthority> list = new ArrayList<>();
 
         if(perm.admin) list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         if(perm.user) list.add(new SimpleGrantedAuthority("ROLE_USER"));

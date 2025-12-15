@@ -16,7 +16,6 @@
     <appender-ref ref="SOCKET" />
   </appender>
 
-
   <root level="INFO">
     <appender-ref ref="ASYNC" />
     <appender-ref ref="STDOUT" />

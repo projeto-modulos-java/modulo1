@@ -12,11 +12,10 @@ import com.projeto.modulo1.services.adapters.UserAdapter;
 import com.projeto.modulo1.services.exceptions.UserException;
 
 @Service
-
 public class UserService {
 
-    final private UserRepository repository;
-    final private UserAdapter adapter;
+    private final UserRepository repository;
+    private final UserAdapter adapter;
 
     public UserService(UserRepository repository, UserAdapter adapter){
         this.repository = repository;
@@ -31,13 +30,13 @@ public class UserService {
         return adapter.adaptUsers(repository.findByAtivoIsTrue(pageable));
     }
 
-    public void createUser(User user) throws Exception{
+    public void createUser(User user) throws UserException{
         if(this.repository.findByEmail(user.getEmail()).isPresent()) throw new UserException("Usuário com este email já existe");
         user.setAtivo(true);
         this.repository.save(adapter.adaptUser(user));
     }
 
-    public void updateUser(User user, int id) throws Exception{
+    public void updateUser(User user, int id) throws UserException{
 
         UserEntity entity = this.repository.findById(id).orElse(null);
 

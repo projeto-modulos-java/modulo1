@@ -1,4 +1,4 @@
-package com.projeto.modulo1.controllers.exceptionsHandler;
+package com.projeto.modulo1.controllers.exception_handler;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
